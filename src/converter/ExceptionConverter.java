@@ -1,4 +1,4 @@
-package exception_manager;
+package converter;
 
 public class ExceptionConverter {
 
