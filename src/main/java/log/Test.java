@@ -3,7 +3,12 @@ package log;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Test {
+	
+	private static final Logger LOGGER = LogManager.getLogger(Test.class);
 
 	public static void main(String[] args) throws IOException {
 		
@@ -11,13 +16,14 @@ public class Test {
 		ConsolePrinter printer = ConsolePrinter.getInstance();
 		printer.start(System.nanoTime(), logDirectory);
 		
-		System.out.println("Test: System.out flow into the log file");
-		System.err.println("Test: System.err flow into the log file");
+		LOGGER.info("Test: System.out flow into the log file");
+		LOGGER.error("Test: System.err flow into the log file");
 		
 		try {
 			throw new Exception("Test: exception into log file");
 		}
 		catch(Exception e) {
+			LOGGER.error("Error in Test: exception into log file", e);
 			e.printStackTrace();
 		}
 	}
